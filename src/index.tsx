@@ -1,16 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/app/app';
-import offers from './mocks/mocks';
+import App from './components/app';
+import {Setting} from './const';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+const mainProps = {
+  placesCount: Setting.PlacesCount,
+  cardsCount: Setting.CardsCount,
+};
+
 root.render(
   <React.StrictMode>
-    <App
-      offers = {offers}
-    />
+    <App {...mainProps} />
   </React.StrictMode>
 );
