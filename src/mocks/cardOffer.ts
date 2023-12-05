@@ -1,8 +1,8 @@
-import { Offer } from '../types/offer';
+import { OfferType } from '../types/offer-type';
 
-export const CardOffer: Offer[] = [
+export const CardOffer: OfferType[] = [
   {
-    bedrooms: 3,
+    bedrooms: 2,
     city: {
       location: {
         latitude: 52.370216,
@@ -11,19 +11,33 @@ export const CardOffer: Offer[] = [
       },
       name: 'Amsterdam',
     },
-    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    description: 'A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.',
     goods: [
-      'Heating'
+      'Laptop friendly workspace',
+      'Breakfast'
     ],
     host: {
-      avatarUrl: 'img/apartment-01.jpg',
+      avatarUrl: 'img/avatar-angelina.jpg',
       id: 3,
       isPro: true,
       name: 'Angelina'
     },
     id: 1,
     images: [
-      'img/1.png'
+      'https://14.react.pages.academy/static/offer/16.jpg',
+      'https://14.react.pages.academy/static/offer/13.jpg',
+      'https://14.react.pages.academy/static/offer/6.jpg',
+      'https://14.react.pages.academy/static/offer/11.jpg',
+      'https://14.react.pages.academy/static/offer/14.jpg',
+      'https://14.react.pages.academy/static/offer/9.jpg',
+      'https://14.react.pages.academy/static/offer/2.jpg',
+      'https://14.react.pages.academy/static/offer/15.jpg',
+      'https://14.react.pages.academy/static/offer/7.jpg',
+      'https://14.react.pages.academy/static/offer/17.jpg',
+      'https://14.react.pages.academy/static/offer/4.jpg',
+      'https://14.react.pages.academy/static/offer/8.jpg',
+      'https://14.react.pages.academy/static/offer/10.jpg',
+      'https://14.react.pages.academy/static/offer/5.jpg'
     ],
     isFavorite: true,
     isPremium: true,
@@ -32,15 +46,41 @@ export const CardOffer: Offer[] = [
       longitude: 4.673877537499948,
       zoom: 8
     },
-    maxAdults: 4,
-    previewImage: 'img/apartment-01.jpg',
+    maxAdults: 2,
+    previewImage: 'https://14.react.pages.academy/static/offer/3.jpg',
     price: 120,
     rating: 4,
-    title: 'Beautiful & luxurious studio at great location',
-    type: 'apartment'
+    title: 'Waterfront with extraordinary view',
+    type: 'apartment',
+    comments: [
+      {
+        'id': 1,
+        'user': {
+          'id': 13,
+          'isPro': false,
+          'name': 'Zak',
+          'avatarUrl': 'https://14.react.pages.academy/static/avatar/4.jpg'
+        },
+        'rating': 2,
+        'comment': 'The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
+        'date': '2023-09-30T09:23:20.316Z'
+      },
+      {
+        'id': 2,
+        'user': {
+          'id': 15,
+          'isPro': false,
+          'name': 'Kendall',
+          'avatarUrl': 'https://14.react.pages.academy/static/avatar/6.jpg'
+        },
+        'rating': 3,
+        'comment': 'The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
+        'date': '2023-09-30T09:23:20.316Z'
+      }
+    ]
   },
   {
-    bedrooms: 3,
+    bedrooms: 2,
     city: {
       location: {
         latitude: 52.370216,
@@ -49,19 +89,34 @@ export const CardOffer: Offer[] = [
       },
       name: 'Amsterdam',
     },
-    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    description: 'This is a place for dreamers to reset, reflect, and create. Designed with a "slow" pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.',
     goods: [
-      'Heating'
+      'Laptop friendly workspace',
+      'Breakfast',
+      'Washer'
     ],
     host: {
-      avatarUrl: 'img/1.png',
+      avatarUrl: 'img/avatar-angelina.jpg',
       id: 3,
       isPro: true,
       name: 'Angelina'
     },
-    id: 1,
+    id: 2,
     images: [
-      'img/1.png'
+      'https://14.react.pages.academy/static/offer/8.jpg',
+      'https://14.react.pages.academy/static/offer/7.jpg',
+      'https://14.react.pages.academy/static/offer/17.jpg',
+      'https://14.react.pages.academy/static/offer/16.jpg',
+      'https://14.react.pages.academy/static/offer/1.jpg',
+      'https://14.react.pages.academy/static/offer/14.jpg',
+      'https://14.react.pages.academy/static/offer/12.jpg',
+      'https://14.react.pages.academy/static/offer/2.jpg',
+      'https://14.react.pages.academy/static/offer/10.jpg',
+      'https://14.react.pages.academy/static/offer/6.jpg',
+      'https://14.react.pages.academy/static/offer/20.jpg',
+      'https://14.react.pages.academy/static/offer/4.jpg',
+      'https://14.react.pages.academy/static/offer/5.jpg',
+      'https://14.react.pages.academy/static/offer/13.jpg'
     ],
     isFavorite: true,
     isPremium: false,
@@ -70,12 +125,38 @@ export const CardOffer: Offer[] = [
       longitude: 4.673877537499948,
       zoom: 8
     },
-    maxAdults: 4,
-    previewImage: 'img/room.jpg',
+    maxAdults: 3,
+    previewImage: 'https://14.react.pages.academy/static/offer/14.jpg',
     price: 80,
     rating: 2.5,
-    title: 'Wood and stone place',
-    type: 'room'
+    title: 'House in countryside',
+    type: 'room',
+    comments: [
+      {
+        'id': 1,
+        'user': {
+          'id': 13,
+          'isPro': false,
+          'name': 'Zak',
+          'avatarUrl': 'https://14.react.pages.academy/static/avatar/4.jpg'
+        },
+        'rating': 2,
+        'comment': 'The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
+        'date': '2023-09-30T09:23:20.316Z'
+      },
+      {
+        'id': 2,
+        'user': {
+          'id': 15,
+          'isPro': false,
+          'name': 'Kendall',
+          'avatarUrl': 'https://14.react.pages.academy/static/avatar/6.jpg'
+        },
+        'rating': 3,
+        'comment': 'The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
+        'date': '2023-09-30T09:23:20.316Z'
+      }
+    ]
   },
   {
     bedrooms: 3,
@@ -87,19 +168,41 @@ export const CardOffer: Offer[] = [
       },
       name: 'Amsterdam',
     },
-    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    description: 'I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!',
     goods: [
-      'Heating'
+      'Washing machine',
+      'Laptop friendly workspace',
+      'Towels',
+      'Baby seat',
+      'Air conditioning',
+      'Coffee machine',
+      'Fridge',
+      'Breakfast',
+      'Washer',
+      'Dishwasher'
     ],
     host: {
-      avatarUrl: 'img/1.png',
+      avatarUrl: 'img/avatar-angelina.jpg',
       id: 3,
       isPro: true,
       name: 'Angelina'
     },
-    id: 1,
+    id: 3,
     images: [
-      'img/1.png'
+      'https://14.react.pages.academy/static/offer/9.jpg',
+      'https://14.react.pages.academy/static/offer/3.jpg',
+      'https://14.react.pages.academy/static/offer/5.jpg',
+      'https://14.react.pages.academy/static/offer/18.jpg',
+      'https://14.react.pages.academy/static/offer/8.jpg',
+      'https://14.react.pages.academy/static/offer/10.jpg',
+      'https://14.react.pages.academy/static/offer/1.jpg',
+      'https://14.react.pages.academy/static/offer/19.jpg',
+      'https://14.react.pages.academy/static/offer/16.jpg',
+      'https://14.react.pages.academy/static/offer/7.jpg',
+      'https://14.react.pages.academy/static/offer/6.jpg',
+      'https://14.react.pages.academy/static/offer/14.jpg',
+      'https://14.react.pages.academy/static/offer/4.jpg',
+      'https://14.react.pages.academy/static/offer/12.jpg'
     ],
     isFavorite: true,
     isPremium: false,
@@ -109,14 +212,40 @@ export const CardOffer: Offer[] = [
       zoom: 8
     },
     maxAdults: 4,
-    previewImage: 'img/apartment-02.jpg',
+    previewImage: 'https://14.react.pages.academy/static/offer/3.jpg',
     price: 132,
     rating: 4.9,
-    title: 'Canal View Prinsengracht',
-    type: 'apartment'
+    title: 'Loft Studio in the Central Area',
+    type: 'apartment',
+    comments: [
+      {
+        'id': 1,
+        'user': {
+          'id': 13,
+          'isPro': false,
+          'name': 'Zak',
+          'avatarUrl': 'https://14.react.pages.academy/static/avatar/4.jpg'
+        },
+        'rating': 2,
+        'comment': 'The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
+        'date': '2023-09-30T09:23:20.316Z'
+      },
+      {
+        'id': 2,
+        'user': {
+          'id': 15,
+          'isPro': false,
+          'name': 'Kendall',
+          'avatarUrl': 'https://14.react.pages.academy/static/avatar/6.jpg'
+        },
+        'rating': 3,
+        'comment': 'The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
+        'date': '2023-09-30T09:23:20.316Z'
+      }
+    ]
   },
   {
-    bedrooms: 3,
+    bedrooms: 1,
     city: {
       location: {
         latitude: 52.370216,
@@ -125,19 +254,35 @@ export const CardOffer: Offer[] = [
       },
       name: 'Amsterdam',
     },
-    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    description: 'Design interior in most sympathetic area! Complitely renovated, well-equipped, cosy studio in idyllic, over 100 years old wooden house. Calm street, fast connection to center and airport.',
     goods: [
-      'Heating'
+      'Breakfast',
+      'Washer',
+      'Laptop friendly workspace',
+      'Air conditioning'
     ],
     host: {
-      avatarUrl: 'img/1.png',
+      avatarUrl: 'img/avatar-angelina.jpg',
       id: 3,
       isPro: true,
       name: 'Angelina'
     },
-    id: 1,
+    id: 4,
     images: [
-      'img/1.png'
+      'https://14.react.pages.academy/static/offer/15.jpg',
+      'https://14.react.pages.academy/static/offer/18.jpg',
+      'https://14.react.pages.academy/static/offer/3.jpg',
+      'https://14.react.pages.academy/static/offer/6.jpg',
+      'https://14.react.pages.academy/static/offer/19.jpg',
+      'https://14.react.pages.academy/static/offer/2.jpg',
+      'https://14.react.pages.academy/static/offer/17.jpg',
+      'https://14.react.pages.academy/static/offer/10.jpg',
+      'https://14.react.pages.academy/static/offer/1.jpg',
+      'https://14.react.pages.academy/static/offer/4.jpg',
+      'https://14.react.pages.academy/static/offer/16.jpg',
+      'https://14.react.pages.academy/static/offer/20.jpg',
+      'https://14.react.pages.academy/static/offer/13.jpg',
+      'https://14.react.pages.academy/static/offer/5.jpg'
     ],
     isFavorite: true,
     isPremium: true,
@@ -146,15 +291,41 @@ export const CardOffer: Offer[] = [
       longitude: 4.673877537499948,
       zoom: 8
     },
-    maxAdults: 4,
-    previewImage: 'img/apartment-03.jpg',
+    maxAdults: 2,
+    previewImage: 'https://14.react.pages.academy/static/offer/6.jpg',
     price: 180,
     rating: 4,
     title: 'Nice, cozy, warm big bed apartment',
-    type: 'apartment'
+    type: 'apartment',
+    comments: [
+      {
+        'id': 1,
+        'user': {
+          'id': 13,
+          'isPro': false,
+          'name': 'Zak',
+          'avatarUrl': 'https://14.react.pages.academy/static/avatar/4.jpg'
+        },
+        'rating': 2,
+        'comment': 'The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
+        'date': '2023-09-30T09:23:20.316Z'
+      },
+      {
+        'id': 2,
+        'user': {
+          'id': 15,
+          'isPro': false,
+          'name': 'Kendall',
+          'avatarUrl': 'https://14.react.pages.academy/static/avatar/6.jpg'
+        },
+        'rating': 3,
+        'comment': 'The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
+        'date': '2023-09-30T09:23:20.316Z'
+      }
+    ]
   },
   {
-    bedrooms: 3,
+    bedrooms: 5,
     city: {
       location: {
         latitude: 52.370216,
@@ -163,19 +334,38 @@ export const CardOffer: Offer[] = [
       },
       name: 'Amsterdam',
     },
-    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    description: 'Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.',
     goods: [
-      'Heating'
+      'Baby seat',
+      'Laptop friendly workspace',
+      'Fridge',
+      'Air conditioning',
+      'Breakfast',
+      'Towels',
+      'Washer'
     ],
     host: {
-      avatarUrl: 'img/1.png',
+      avatarUrl: 'img/avatar-angelina.jpg',
       id: 3,
       isPro: true,
       name: 'Angelina'
     },
-    id: 1,
+    id: 5,
     images: [
-      'img/1.png'
+      'https://14.react.pages.academy/static/offer/20.jpg',
+      'https://14.react.pages.academy/static/offer/18.jpg',
+      'https://14.react.pages.academy/static/offer/13.jpg',
+      'https://14.react.pages.academy/static/offer/8.jpg',
+      'https://14.react.pages.academy/static/offer/16.jpg',
+      'https://14.react.pages.academy/static/offer/12.jpg',
+      'https://14.react.pages.academy/static/offer/6.jpg',
+      'https://14.react.pages.academy/static/offer/7.jpg',
+      'https://14.react.pages.academy/static/offer/9.jpg',
+      'https://14.react.pages.academy/static/offer/3.jpg',
+      'https://14.react.pages.academy/static/offer/17.jpg',
+      'https://14.react.pages.academy/static/offer/2.jpg',
+      'https://14.react.pages.academy/static/offer/15.jpg',
+      'https://14.react.pages.academy/static/offer/1.jpg'
     ],
     isFavorite: true,
     isPremium: false,
@@ -184,11 +374,37 @@ export const CardOffer: Offer[] = [
       longitude: 4.673877537499948,
       zoom: 8
     },
-    maxAdults: 4,
-    previewImage: 'img/room.jpg',
+    maxAdults: 5,
+    previewImage: 'https://14.react.pages.academy/static/offer/20.jpg',
     price: 80,
     rating: 3.5,
-    title: 'Wood and stone place',
-    type: 'room'
+    title: 'The house among olive',
+    type: 'room',
+    comments: [
+      {
+        'id': 1,
+        'user': {
+          'id': 13,
+          'isPro': false,
+          'name': 'Zak',
+          'avatarUrl': 'https://14.react.pages.academy/static/avatar/4.jpg'
+        },
+        'rating': 2,
+        'comment': 'The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
+        'date': '2023-09-30T09:23:20.316Z'
+      },
+      {
+        'id': 2,
+        'user': {
+          'id': 15,
+          'isPro': false,
+          'name': 'Kendall',
+          'avatarUrl': 'https://14.react.pages.academy/static/avatar/6.jpg'
+        },
+        'rating': 3,
+        'comment': 'The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
+        'date': '2023-09-30T09:23:20.316Z'
+      }
+    ]
   }
 ];

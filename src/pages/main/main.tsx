@@ -1,8 +1,13 @@
-import { getCards } from '../../util/getCards';
-import { CardOffer } from '../../mocks/cardOffer';
+import CardList from '../../components/card-list/card-list';
+import { OfferType } from '../../types/offer-type';
 import Logo from '../../components/logo/logo';
+import CityFilters from '../../components/city-filters/city-filters';
+import MainNavigation from '../../components/main-navigation/main-navigation';
 
-export default function MainPage (): JSX.Element {
+type MainPageProps = {
+  data: OfferType[];
+}
+export default function MainPage ({data} : MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -11,27 +16,7 @@ export default function MainPage (): JSX.Element {
             <div className="header__left">
               <Logo />
             </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a
-                    className="header__nav-link header__nav-link--profile"
-                    href="#"
-                  >
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">
-                  Oliver.conner@gmail.com
-                    </span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+            <MainNavigation />
           </div>
         </div>
       </header>
@@ -39,38 +24,7 @@ export default function MainPage (): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <CityFilters />
           </section>
         </div>
         <div className="cities">
@@ -104,9 +58,7 @@ export default function MainPage (): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {getCards(CardOffer)}
-              </div>
+              <CardList offers={data} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map" />
