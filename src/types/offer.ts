@@ -1,7 +1,10 @@
-type Location = {
-  latitude: number;
-  longitude: number;
-  zoom: number;
+import { Location } from './location';
+
+type Host = {
+  avatarUrl: string;
+  id: number;
+  isPro: boolean;
+  name: string;
 }
 
 export type Offer = {
@@ -11,13 +14,8 @@ export type Offer = {
     name: string;
   };
   description: string;
-    goods: string[];
-    host: {
-      avatarUrl: string;
-      id: number;
-      isPro: boolean;
-      name: string;
-  };
+  goods: string[];
+  host: Host;
   id: number;
   images: string[];
   isFavorite: boolean;
