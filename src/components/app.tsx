@@ -7,16 +7,16 @@ import Login from '../pages/login/login';
 import Favorites from '../pages/favorites/favorites';
 import Offer from '../pages/offer/offer';
 import NotFound from '../pages/not-found/not-found';
+import { CardOffer } from '../mocks/cardOffer';
 
 export default function App(): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route
-            path={AppRoute.Main}
-            element={<MainPage />}
-          />
+          <Route path={AppRoute.Main} element={<MainPage data={CardOffer}/>} >
+            <Route path={':city'}/>
+          </Route>
           <Route
             path={AppRoute.Login}
             element={<Login />}
@@ -24,14 +24,13 @@ export default function App(): JSX.Element {
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
                 <Favorites />
               </PrivateRoute>
             }
           />
           <Route path={AppRoute.Offer}>
-            <Route index element={<Offer/>}/>
-            <Route path={AppRoute.OfferId} element={<Offer />}/>
+            <Route path={':id'} element={<Offer offers={CardOffer}/>}/>
           </Route>
           <Route
             path={AppRoute.Error}

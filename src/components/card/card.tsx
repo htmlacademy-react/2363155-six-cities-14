@@ -1,17 +1,24 @@
-import { Offer } from '../../types/offer';
+import { OfferType } from '../../types/offer-type';
 import {Link} from 'react-router-dom';
 import { AppRoute } from '../../const';
+import {useState} from 'react';
 
-export default function Card ({...offer}: Offer): JSX.Element {
+export default function Card ({...offer}: OfferType): JSX.Element {
+  const [activeCard, setActiveCard] = useState({});
+  function handleMouseOver () {
+    setActiveCard(offer.id);
+    // eslint-disable-next-line
+    console.log(activeCard);
+  }
   const isPremium = 'Premium';
-  const ratingPrecentage = (offer.rating * 100) / 5;
+  const ratingPrecentage = Math.round((offer.rating * 100) / 5);
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card" onMouseOver={handleMouseOver}>
       <div className={offer.isPremium ? 'place-card__mark' : ''}>
         <span>{offer.isPremium && isPremium}</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={AppRoute.Offer}>
+        <Link to={`${AppRoute.Offer}/${offer.id}`}>
           <img
             className="place-card__image"
             src={offer.previewImage}
@@ -48,7 +55,7 @@ export default function Card ({...offer}: Offer): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
+          <Link to={`${AppRoute.Offer}/${offer.id}`}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{`${offer.type[0].toUpperCase()}${offer.type.slice(1)}`}</p>
       </div>
