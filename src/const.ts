@@ -1,3 +1,5 @@
+export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'] as const;
+
 export const enum Props {
   CardsCount = 5,
 }

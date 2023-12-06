@@ -42,8 +42,8 @@ export const CardOffer: OfferType[] = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
       zoom: 8
     },
     maxAdults: 2,
@@ -62,7 +62,7 @@ export const CardOffer: OfferType[] = [
           'avatarUrl': 'https://14.react.pages.academy/static/avatar/4.jpg'
         },
         'rating': 2,
-        'comment': 'The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
+        'comment': 'Offer 1: The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
         'date': '2023-09-30T09:23:20.316Z'
       },
       {
@@ -121,8 +121,8 @@ export const CardOffer: OfferType[] = [
     isFavorite: true,
     isPremium: false,
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
       zoom: 8
     },
     maxAdults: 3,
@@ -141,7 +141,7 @@ export const CardOffer: OfferType[] = [
           'avatarUrl': 'https://14.react.pages.academy/static/avatar/4.jpg'
         },
         'rating': 2,
-        'comment': 'The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
+        'comment': 'Offer 2: The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
         'date': '2023-09-30T09:23:20.316Z'
       },
       {
@@ -207,8 +207,8 @@ export const CardOffer: OfferType[] = [
     isFavorite: true,
     isPremium: false,
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
       zoom: 8
     },
     maxAdults: 4,
@@ -227,7 +227,7 @@ export const CardOffer: OfferType[] = [
           'avatarUrl': 'https://14.react.pages.academy/static/avatar/4.jpg'
         },
         'rating': 2,
-        'comment': 'The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
+        'comment': 'Offer 3: The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
         'date': '2023-09-30T09:23:20.316Z'
       },
       {
@@ -287,8 +287,8 @@ export const CardOffer: OfferType[] = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
       zoom: 8
     },
     maxAdults: 2,
@@ -307,7 +307,7 @@ export const CardOffer: OfferType[] = [
           'avatarUrl': 'https://14.react.pages.academy/static/avatar/4.jpg'
         },
         'rating': 2,
-        'comment': 'The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
+        'comment': 'Offer 4: The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
         'date': '2023-09-30T09:23:20.316Z'
       },
       {
@@ -390,7 +390,7 @@ export const CardOffer: OfferType[] = [
           'avatarUrl': 'https://14.react.pages.academy/static/avatar/4.jpg'
         },
         'rating': 2,
-        'comment': 'The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
+        'comment': 'Offer 5: The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
         'date': '2023-09-30T09:23:20.316Z'
       },
       {

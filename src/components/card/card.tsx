@@ -1,19 +1,30 @@
 import { OfferType } from '../../types/offer-type';
 import {Link} from 'react-router-dom';
 import { AppRoute } from '../../const';
-import {useState} from 'react';
 
-export default function Card ({...offer}: OfferType): JSX.Element {
-  const [activeCard, setActiveCard] = useState({});
-  function handleMouseOver () {
-    setActiveCard(offer.id);
-    // eslint-disable-next-line
-    console.log(activeCard);
-  }
+type CardProps = {
+  offer: OfferType;
+  onCardHover?: (offerId: number | null) => void;
+}
+
+export default function Card ({offer, onCardHover}: CardProps): JSX.Element {
   const isPremium = 'Premium';
   const ratingPrecentage = Math.round((offer.rating * 100) / 5);
+
+  function handleMouseEnter() {
+    onCardHover?.(offer.id);
+  }
+
+  function handleMouseLeave() {
+    onCardHover?.(null);
+  }
+
   return (
-    <article className="cities__card place-card" onMouseOver={handleMouseOver}>
+    <article
+      className="cities__card place-card"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className={offer.isPremium ? 'place-card__mark' : ''}>
         <span>{offer.isPremium && isPremium}</span>
       </div>
