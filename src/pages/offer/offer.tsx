@@ -1,6 +1,6 @@
 import {Helmet} from 'react-helmet-async';
 import {Navigate} from 'react-router-dom';
-import { AppRoute, RequestStatus } from '../../const';
+import { AppRoute, RequestStatus, MAX_OFFER_IMAGES_COUNT } from '../../const';
 import Logo from '../../components/logo/logo';
 import MainNavigation from '../../components/main-navigation/main-navigation';
 import {useParams} from 'react-router-dom';
@@ -14,6 +14,8 @@ import { fetchCurrentOffer, fetchOfferComments, fetchOffersNearby } from '../../
 import { useEffect } from 'react';
 import Spinner from '../../components/spinner/spinner';
 import { getCurrentOffer, getCurrentComments, getNearbyOffers } from '../../store/slices/selectors';
+import FavoriteButton from '../../components/favorite-button/favorite-button';
+import cn from 'classnames';
 
 export default function Offer (): JSX.Element {
   const dispatch = useAppDispatch();
@@ -24,7 +26,7 @@ export default function Offer (): JSX.Element {
   const nearbyToShow = nearbyOffers.slice(0, 3);
   const loadingStatus = useAppSelector((state) => state.offers.isCurrentOfferDataLoading);
   const isPremium = 'Premium';
-  const getRating = (rating: number) => Math.round((rating * 100) / 5);
+  const getRating = (rating: number) => Math.round(rating) / 5 * 100;
 
   useEffect(() => {
     if (offerId) {
@@ -39,6 +41,10 @@ export default function Offer (): JSX.Element {
       loadingStatus === RequestStatus.Rejected ? <Navigate to={AppRoute.Error} /> : <Spinner />
     );
   }
+
+  const offerAvatarWrapperClass = cn('offer__avatar-wrapper', 'user__avatar-wrapper', {
+    'offer__avatar-wrapper--pro ' : currentOffer.host.isPro,
+  });
 
   return (
     <div className="page">
@@ -59,7 +65,7 @@ export default function Offer (): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {currentOffer.images.map((image : string) => <OfferImage image={image} key={`${currentOffer.id}${image}`}/>)}
+              {currentOffer.images.slice(0, MAX_OFFER_IMAGES_COUNT).map((image : string) => <OfferImage image={image} key={`${currentOffer.id}${image}`}/>)}
             </div>
           </div>
           <div className="offer__container container">
@@ -69,12 +75,7 @@ export default function Offer (): JSX.Element {
               </div>
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{currentOffer.title}</h1>
-                <button className="offer__bookmark-button button" type="button">
-                  <svg className="offer__bookmark-icon" width={31} height={33}>
-                    <use xlinkHref="#icon-bookmark" />
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <FavoriteButton offerId={currentOffer.id} isFavorite={currentOffer.isFavorite} isPlaceCard={false} isOfferCard/>
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
@@ -101,7 +102,7 @@ export default function Offer (): JSX.Element {
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
-                  <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+                  <div className={offerAvatarWrapperClass}>
                     <img
                       className="offer__avatar user__avatar"
                       src={currentOffer.host.avatarUrl}
@@ -111,7 +112,7 @@ export default function Offer (): JSX.Element {
                     />
                   </div>
                   <span className="offer__user-name">{currentOffer.host.name}</span>
-                  <span className="offer__user-status">{currentOffer.host.isPro}</span>
+                  {currentOffer.host.isPro && <span className="offer__user-status">Pro</span>}
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">{currentOffer.title}</p>
@@ -121,7 +122,7 @@ export default function Offer (): JSX.Element {
               <ReviewsList comments={currentComments} id={offerId}/>
             </div>
           </div>
-          <Map location={currentOffer.city.location} offers={[currentOffer, ...nearbyToShow]} specialOfferId={currentOffer.id} isOfferPage/>
+          <Map key={currentOffer.id} location={currentOffer.city.location} offers={[currentOffer, ...nearbyToShow]} specialOfferId={currentOffer.id} isOfferPage/>
         </section>
         <div className="container">
           <section className="near-places places">

@@ -8,6 +8,7 @@ import { userSlice } from './slices/user';
 import {saveToken, dropToken} from '../services/token';
 import { AuthData, UserData, UserComment } from '../types/api-data';
 import { redirectToRoute } from './action';
+import { FavoriteData } from '../types/api-data';
 
 type Extra = {
   dispatch: AppDispatch;
@@ -102,4 +103,13 @@ export const fetchFavorites = createAsyncThunk<OfferType[], undefined, Extra>(
     const {data} = await api.get<OfferType[]>(APIRoute.Favorite);
     return data;
   },
+);
+
+export const setIsFavorite = createAsyncThunk<OfferType, FavoriteData, Extra>(
+  'data/setIsFavorite',
+  async ({offerId, status}, { extra: api }) => {
+    const { data } = await api.post<OfferType>(`${APIRoute.Favorite}/${offerId}/${status}`, { offerId, status});
+
+    return data;
+  }
 );

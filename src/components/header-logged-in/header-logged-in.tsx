@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/redux-hooks';
 import { useAppDispatch } from '../../hooks/redux-hooks';
-import { logoutAction, getCurrentUserData } from '../../store/api-actions';
+import { logoutAction, getCurrentUserData, fetchFavorites } from '../../store/api-actions';
 import { useEffect } from 'react';
 
 export default function HeaderLoggedIn () {
@@ -12,6 +12,7 @@ export default function HeaderLoggedIn () {
 
   useEffect(() => {
     dispatch(getCurrentUserData());
+    dispatch(fetchFavorites());
   }, [dispatch]);
 
   return (

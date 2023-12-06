@@ -16,17 +16,17 @@ type IconConfig = {
 
 const defaultIconConfig : IconConfig = {
   url: 'img/pin.svg',
-  width: 28,
-  height: 40,
-  anchorX: 14,
+  width: 27,
+  height: 39,
+  anchorX: 13.5,
   anchorY: 40,
 };
 
 const activeIconConfig : IconConfig = {
   url: 'img/pin-active.svg',
-  width: 28,
-  height: 40,
-  anchorX: 14,
+  width: 27,
+  height: 39,
+  anchorX: 13.5,
   anchorY: 40,
 };
 
@@ -62,6 +62,7 @@ export default function Map ({location, offers, specialOfferId, isMainPage, isOf
 
   useEffect(() => {
     if (map) {
+      map.scrollWheelZoom.disable();
       const markerLayer = layerGroup().addTo(map);
 
       offers.forEach((offer : OfferType) => {

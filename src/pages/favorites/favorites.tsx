@@ -2,28 +2,18 @@ import {Helmet} from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import MainNavigation from '../../components/main-navigation/main-navigation';
 import FavoritesList from '../../components/favorites-list/favorites-list';
-import { useAppSelector, useAppDispatch } from '../../hooks/redux-hooks';
-import { fetchFavorites } from '../../store/api-actions';
-import { useEffect } from 'react';
-import Spinner from '../../components/spinner/spinner';
-import { RequestStatus } from '../../const';
-
+import { useAppSelector } from '../../hooks/redux-hooks';
+import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
+import cn from 'classnames';
 export default function Favorites (): JSX.Element {
-  const dispatch = useAppDispatch();
   const favoriteOffers = useAppSelector((state) => state.offers.favoriteOffers);
-  const loadingStatus = useAppSelector((state) => state.offers.isFavoriteDataLoading);
-  useEffect(() => {
-    dispatch(fetchFavorites());
-  }, [dispatch]);
 
-  if (loadingStatus === RequestStatus.Pending) {
-    return (
-      <Spinner />
-    );
-  }
+  const pageClass = cn('page', {
+    'page--favorites-empty': favoriteOffers.length <= 0
+  });
 
   return (
-    <div className="page">
+    <div className={pageClass}>
       <Helmet>
         <title>6 cities: favorites</title>
       </Helmet>
@@ -37,14 +27,7 @@ export default function Favorites (): JSX.Element {
           </div>
         </div>
       </header>
-      <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesList favoriteOffers={favoriteOffers} />
-          </section>
-        </div>
-      </main>
+      {favoriteOffers.length > 0 ? <FavoritesList favoriteOffers={favoriteOffers} /> : <FavoritesEmpty />}
       <footer className="footer container">
         <a className="footer__logo-link" href="main.html">
           <img
