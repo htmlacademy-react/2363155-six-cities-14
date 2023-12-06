@@ -27,6 +27,7 @@ export default function Offer (): JSX.Element {
   const nearbyToShow = nearbyOffers.slice(0, NEARBY_COUNT);
   const loadingStatus = useAppSelector((state) => state.offers.isCurrentOfferDataLoading);
   const isPremium = 'Premium';
+  const loginStatus = useAppSelector((state) => state.user.isLoginLoading);
 
   useEffect(() => {
     if (offerId) {
@@ -34,7 +35,7 @@ export default function Offer (): JSX.Element {
       dispatch(fetchOfferComments(offerId));
       dispatch(fetchOffersNearby(offerId));
     }
-  }, [offerId, dispatch]);
+  }, [offerId, dispatch, loginStatus]);
 
   if (!currentOffer || loadingStatus !== RequestStatus.Fulfilled) {
     return (

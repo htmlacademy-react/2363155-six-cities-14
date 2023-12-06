@@ -9,6 +9,7 @@ import {saveToken, dropToken} from '../services/token';
 import { AuthData, UserData, UserComment } from '../types/api-data';
 import { redirectToRoute } from './action';
 import { FavoriteData } from '../types/api-data';
+import { clearFavorites } from './slices/offers';
 
 type Extra = {
   dispatch: AppDispatch;
@@ -76,6 +77,7 @@ export const logoutAction = createAsyncThunk<void, undefined, Extra>(
   async (_arg, {extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
+    clearFavorites();
   },
 );
 

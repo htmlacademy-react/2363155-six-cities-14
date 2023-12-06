@@ -44,6 +44,9 @@ export const offerSlice = createSlice({
     },
     dropOffer(state, action: PayloadAction<null | OfferType>) {
       state.currentOffer = action.payload;
+    },
+    clearFavorites(state) {
+      state.favoriteOffers = [];
     }
   },
   extraReducers: (builder) => {
@@ -140,4 +143,4 @@ export const offerSlice = createSlice({
   }
 });
 
-export const { changeSortOption, dropOffer } = offerSlice.actions;
+export const { changeSortOption, dropOffer, clearFavorites } = offerSlice.actions;
