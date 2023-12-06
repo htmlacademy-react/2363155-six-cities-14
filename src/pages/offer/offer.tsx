@@ -13,14 +13,14 @@ import { useAppSelector, useAppDispatch } from '../../hooks/redux-hooks';
 import { fetchCurrentOffer, fetchOfferComments, fetchOffersNearby } from '../../store/api-actions';
 import { useEffect } from 'react';
 import Spinner from '../../components/spinner/spinner';
-
+import { getCurrentOffer, getCurrentComments, getNearbyOffers } from '../../store/slices/selectors';
 
 export default function Offer (): JSX.Element {
   const dispatch = useAppDispatch();
   const {id: offerId} = useParams();
-  const currentOffer = useAppSelector((state) => state.offers.currentOffer);
-  const currentComments = useAppSelector((state) => state.offers.currentOfferComments);
-  const nearbyOffers = useAppSelector((state) => state.offers.nearbyOffers);
+  const currentOffer = useAppSelector(getCurrentOffer);
+  const currentComments = useAppSelector(getCurrentComments);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
   const nearbyToShow = nearbyOffers.slice(0, 3);
   const loadingStatus = useAppSelector((state) => state.offers.isCurrentOfferDataLoading);
   const isPremium = 'Premium';
