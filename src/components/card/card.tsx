@@ -1,13 +1,17 @@
 import { OfferType } from '../../types/offer-type';
 import {Link} from 'react-router-dom';
 import { AppRoute } from '../../const';
+import cn from 'classnames';
 
 type CardProps = {
   offer: OfferType;
   onCardHover?: (offerId: number | null) => void;
+  isMainPage?: boolean;
+  isFavoritesPage?: boolean;
+  isOfferPage?: boolean;
 }
 
-export default function Card ({offer, onCardHover}: CardProps): JSX.Element {
+export default function Card ({offer, onCardHover, isMainPage = true, isFavoritesPage, isOfferPage}: CardProps): JSX.Element {
   const isPremium = 'Premium';
   const ratingPrecentage = Math.round((offer.rating * 100) / 5);
 
@@ -19,22 +23,37 @@ export default function Card ({offer, onCardHover}: CardProps): JSX.Element {
     onCardHover?.(null);
   }
 
+  const cardClass = cn('place-card', {
+    'cities__card': isMainPage,
+    'favorites__card': isFavoritesPage,
+    'near-places__card': isOfferPage,
+  });
+
+  const imageWrapperClass = cn('place-card__image-wrapper', {
+    'cities__image-wrapper': isMainPage,
+    'favorites__image-wrapper': isFavoritesPage,
+  });
+
+  const favBtnClass = cn('place-card__bookmark-button', 'button', {
+    'place-card__bookmark-button--active': offer.isFavorite,
+  });
+
   return (
     <article
-      className="cities__card place-card"
+      className={cardClass}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <div className={offer.isPremium ? 'place-card__mark' : ''}>
         <span>{offer.isPremium && isPremium}</span>
       </div>
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={imageWrapperClass}>
         <Link to={`${AppRoute.Offer}/${offer.id}`}>
           <img
             className="place-card__image"
             src={offer.previewImage}
-            width={260}
-            height={200}
+            width={isFavoritesPage ? 150 : 260}
+            height={isFavoritesPage ? 110 : 200}
             alt="Place image"
           />
         </Link>
@@ -46,7 +65,7 @@ export default function Card ({offer, onCardHover}: CardProps): JSX.Element {
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
-            className="place-card__bookmark-button button"
+            className={favBtnClass}
             type="button"
           >
             <svg
@@ -73,3 +92,4 @@ export default function Card ({offer, onCardHover}: CardProps): JSX.Element {
     </article>
   );
 }
+

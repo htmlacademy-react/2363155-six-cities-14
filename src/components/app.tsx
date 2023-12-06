@@ -9,42 +9,45 @@ import Offer from '../pages/offer/offer';
 import NotFound from '../pages/not-found/not-found';
 import { CardOffer } from '../mocks/cardOffer';
 import { CITIES } from '../const';
+import ScrollToTop from './scroll-top/scroll-top';
 
 export default function App(): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
-        <Routes>
-          <Route path={AppRoute.Main} element={<MainPage data={CardOffer}/>} >
-            {CITIES.map((city) => (
-              <Route
-                key={city}
-                path={city}
-                element={<MainPage data={CardOffer} />}
-              >
-              </Route>
-            ))}
-          </Route>
-          <Route
-            path={AppRoute.Login}
-            element={<Login />}
-          />
-          <Route
-            path={AppRoute.Favorites}
-            element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <Favorites />
-              </PrivateRoute>
-            }
-          />
-          <Route path={AppRoute.Offer}>
-            <Route path={':id'} element={<Offer offers={CardOffer}/>}/>
-          </Route>
-          <Route
-            path={AppRoute.Error}
-            element={<NotFound />}
-          />
-        </Routes>
+        <ScrollToTop>
+          <Routes>
+            <Route path={AppRoute.Main} element={<MainPage data={CardOffer}/>} >
+              {CITIES.map((city : string) => (
+                <Route
+                  key={city}
+                  path={city}
+                  element={<MainPage data={CardOffer} />}
+                >
+                </Route>
+              ))}
+            </Route>
+            <Route
+              path={AppRoute.Login}
+              element={<Login />}
+            />
+            <Route
+              path={AppRoute.Favorites}
+              element={
+                <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                  <Favorites offers={CardOffer} />
+                </PrivateRoute>
+              }
+            />
+            <Route path={AppRoute.Offer}>
+              <Route path={':id'} element={<Offer offers={CardOffer}/>}/>
+            </Route>
+            <Route
+              path={AppRoute.Error}
+              element={<NotFound />}
+            />
+          </Routes>
+        </ScrollToTop>
       </BrowserRouter>
     </HelmetProvider>
   );
