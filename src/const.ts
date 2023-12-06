@@ -6,6 +6,8 @@ export const DEFAULT_SORTING = 'Popular';
 
 export const TIMEOUT_SHOW_ERROR = 2000;
 
+export const MAX_COMMENT_COUNT = 10;
+
 export const enum Props {
   CardsCount = 5,
 }
@@ -38,4 +40,11 @@ export enum NameSpace {
   Offers = 'offers',
   User = 'user',
   City = 'city'
+}
+
+export enum RequestStatus {
+  Idle = 'idle',
+  Pending = 'pending',
+  Fulfilled = 'fulfilled',
+  Rejected = 'rejected',
 }

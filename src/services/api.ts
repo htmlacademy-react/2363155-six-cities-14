@@ -1,23 +1,23 @@
-import axios, {AxiosInstance} from 'axios';
+import axios, {AxiosInstance, AxiosResponse, AxiosError} from 'axios';
 import { getToken } from './token';
-// import { StatusCodes } from 'http-status-codes';
-// import {processErrorHandle} from './process-error-handle';
+import { StatusCodes } from 'http-status-codes';
+import {toast} from 'react-toastify';
 
 const BASE_URL = 'https://14.design.pages.academy/six-cities';
 const REQUEST_TIMEOUT = 5000;
 
-// type DetailMessageType = {
-//   type: string;
-//   message: string;
-// }
+type DetailMessageType = {
+  type: string;
+  message: string;
+}
 
-// const StatusCodeMapping: Record<number, boolean> = {
-//   [StatusCodes.BAD_REQUEST]: true,
-//   [StatusCodes.UNAUTHORIZED]: true,
-//   [StatusCodes.NOT_FOUND]: true
-// };
+const StatusCodeMapping: Record<number, boolean> = {
+  [StatusCodes.BAD_REQUEST]: true,
+  [StatusCodes.UNAUTHORIZED]: true,
+  [StatusCodes.NOT_FOUND]: true
+};
 
-// const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
+const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
 
 // создание экземпляра Axios
 export const createAPI = (): AxiosInstance => {
@@ -38,18 +38,18 @@ export const createAPI = (): AxiosInstance => {
     },
   );
   // Перехватчик - обработка ошибки -> соответствующая ошибка -> processErrorHandle(сообщение ошибки)
-  // api.interceptors.response.use(
-  //   (response) => response,
-  //   (error: AxiosError<DetailMessageType>) => {
-  //     if (error.response && shouldDisplayError(error.response)) {
-  //       const detailMessage = (error.response.data);
+  api.interceptors.response.use(
+    (response) => response,
+    (error: AxiosError<DetailMessageType>) => {
+      if (error.response && shouldDisplayError(error.response)) {
+        const detailMessage = (error.response.data);
+        toast.warn(detailMessage.message);
+      }
 
-  //       processErrorHandle(detailMessage.message);
-  //     }
-
-  //     throw error;
-  //   }
-  // );
+      throw error;
+    }
+  );
 
   return api;
 };
+

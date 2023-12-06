@@ -1,14 +1,26 @@
 import {Helmet} from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import MainNavigation from '../../components/main-navigation/main-navigation';
-import { OfferType } from '../../types/offer-type';
 import FavoritesList from '../../components/favorites-list/favorites-list';
+import { useAppSelector, useAppDispatch } from '../../hooks/redux-hooks';
+import { fetchFavorites } from '../../store/api-actions';
+import { useEffect } from 'react';
+import Spinner from '../../components/spinner/spinner';
+import { RequestStatus } from '../../const';
 
-type FavoritesProps = {
-  offers: OfferType[];
-}
-export default function Favorites ({offers} : FavoritesProps): JSX.Element {
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+export default function Favorites (): JSX.Element {
+  const dispatch = useAppDispatch();
+  const favoriteOffers = useAppSelector((state) => state.offers.favoriteOffers);
+  const loadingStatus = useAppSelector((state) => state.offers.isFavoriteDataLoading);
+  useEffect(() => {
+    dispatch(fetchFavorites());
+  }, [dispatch]);
+
+  if (loadingStatus === RequestStatus.Pending) {
+    return (
+      <Spinner />
+    );
+  }
 
   return (
     <div className="page">
