@@ -1,3 +1,5 @@
+import { FavoriteServerStatus } from '../const';
+
 export type AuthData = {
   login: string;
   password: string;
@@ -15,4 +17,9 @@ export type UserComment = {
   offerId: string | undefined;
   comment: string;
   rating: number;
+};
+
+export type FavoriteData = {
+  offerId: string;
+  status: FavoriteServerStatus;
 };

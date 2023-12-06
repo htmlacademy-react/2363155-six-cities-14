@@ -1,7 +1,8 @@
-import {ChangeEvent, useState, FormEvent} from 'react';
+import {ChangeEvent, useState, FormEvent, useRef} from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { addComment} from '../../store/api-actions';
 import { RequestStatus } from '../../const';
+import { toast } from 'react-toastify';
 
 type ReviewFormProps = {
   id: string | undefined;
@@ -19,16 +20,17 @@ const Rating = {
 
 export default function ReviewForm ({id} : ReviewFormProps) {
   const dispatch = useAppDispatch();
-  const [commentData, setComment] = useState('');
-  const [ratingData, setRating] = useState(0);
+  const [comment, setComment] = useState('');
+  const [rating, setRating] = useState(0);
   const isValid =
-    commentData.length >= MIN_COMMENT_LENGTH &&
-    commentData.length <= MAX_COMMENT_LENGTH &&
-    ratingData;
+    comment.length >= MIN_COMMENT_LENGTH &&
+    comment.length <= MAX_COMMENT_LENGTH &&
+    rating;
   const commentLoadStatus = useAppSelector((state) => state.offers.isCommentLoading);
   const handleTextareaChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(evt.target.value);
   };
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setRating(Number(evt.target.value));
@@ -38,17 +40,21 @@ export default function ReviewForm ({id} : ReviewFormProps) {
     evt.preventDefault();
     const userComment = {
       offerId: id,
-      comment: commentData,
-      rating: ratingData,
+      comment,
+      rating,
     };
-    dispatch(addComment(userComment)).then(() => {
-      setComment('');
-      setRating(0);
-    });
+    dispatch(addComment(userComment)).unwrap()
+      .then(() => {
+        setComment('');
+        setRating(0);
+      })
+      .catch(() => {
+        toast.error('Failed to send a review. Please try again');
+      });
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSumbit}>
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSumbit} ref={formRef}>
       <label className="reviews__label form__label" htmlFor="review">
   Your review
       </label>
@@ -60,9 +66,11 @@ export default function ReviewForm ({id} : ReviewFormProps) {
               onChange={handleRatingChange}
               className="form__rating-input visually-hidden"
               name="rating"
-              defaultValue={key}
+              value={key}
+              checked = {key === rating.toString()}
               id={`${key}-stars`}
               type="radio"
+              disabled={commentLoadStatus === RequestStatus.Pending }
             />
             <label
               key={`${key}Label`}
@@ -83,7 +91,8 @@ export default function ReviewForm ({id} : ReviewFormProps) {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={commentData}
+        value={comment}
+        disabled={commentLoadStatus === RequestStatus.Pending}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

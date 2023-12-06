@@ -9,12 +9,14 @@ type UserState = {
   authorizationStatus: AuthorizationStatus;
   userData: UserData | Record<string, never>;
   isUserDataLoading: RequestStatus;
+  isLoginLoading: RequestStatus;
 };
 
 const initialState : UserState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   userData: {},
   isUserDataLoading: RequestStatus.Idle,
+  isLoginLoading: RequestStatus.Idle,
 };
 
 export const userSlice = createSlice({
@@ -38,12 +40,17 @@ export const userSlice = createSlice({
         state.userData = {};
         state.isUserDataLoading = RequestStatus.Rejected;
       })
+      .addCase(loginAction.pending, (state) => {
+        state.isLoginLoading = RequestStatus.Pending;
+      })
       .addCase(loginAction.fulfilled, (state, action) => {
         state.userData = action.payload;
         state.authorizationStatus = AuthorizationStatus.Auth;
+        state.isLoginLoading = RequestStatus.Fulfilled;
       })
       .addCase(loginAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
+        state.isLoginLoading = RequestStatus.Rejected;
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;

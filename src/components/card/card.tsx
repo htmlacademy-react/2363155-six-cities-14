@@ -2,6 +2,7 @@ import { OfferType } from '../../types/offer-type';
 import {Link} from 'react-router-dom';
 import { AppRoute } from '../../const';
 import cn from 'classnames';
+import FavoriteButton from '../favorite-button/favorite-button';
 
 type CardProps = {
   offer: OfferType;
@@ -13,7 +14,7 @@ type CardProps = {
 
 export default function Card ({offer, onCardHover, isMainPage = true, isFavoritesPage, isOfferPage}: CardProps): JSX.Element {
   const isPremium = 'Premium';
-  const ratingPrecentage = Math.round((offer.rating * 100) / 5);
+  const ratingPrecentage = Math.round(offer.rating) / 5 * 100;
   const offerId: string = `/offer/${offer.id}`;
 
   function handleMouseEnter() {
@@ -33,10 +34,6 @@ export default function Card ({offer, onCardHover, isMainPage = true, isFavorite
   const imageWrapperClass = cn('place-card__image-wrapper', {
     'cities__image-wrapper': isMainPage,
     'favorites__image-wrapper': isFavoritesPage,
-  });
-
-  const favBtnClass = cn('place-card__bookmark-button', 'button', {
-    'place-card__bookmark-button--active': offer.isFavorite,
   });
 
   return (
@@ -65,19 +62,7 @@ export default function Card ({offer, onCardHover, isMainPage = true, isFavorite
             <b className="place-card__price-value">{`€${offer.price}`}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button
-            className={favBtnClass}
-            type="button"
-          >
-            <svg
-              className="place-card__bookmark-icon"
-              width={18}
-              height={19}
-            >
-              <use xlinkHref="#icon-bookmark" />
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <FavoriteButton offerId={offer.id} isFavorite={offer.isFavorite}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

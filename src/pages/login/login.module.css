@@ -1,0 +1,5 @@
+.alert {
+  display: block;
+  color: red;
+  transform: translateY(-16px);
+}

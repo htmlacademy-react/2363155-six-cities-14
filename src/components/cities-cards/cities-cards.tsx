@@ -2,7 +2,7 @@ import { OfferType } from '../../types/offer-type';
 import Card from '../card/card';
 import {useState} from 'react';
 import Map from '../map/map';
-import { CITIES_MAP } from '../../mocks/cities';
+import { CITIES_MAP } from '../../const';
 import OffersSort from '../offers-sort/offers-sort';
 import { useAppSelector } from '../../hooks/redux-hooks';
 

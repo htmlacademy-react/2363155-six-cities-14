@@ -27,7 +27,7 @@ export default function NotFound () : JSX.Element {
         </div>
         <div className={styles.notFound}>
           <h1 className={styles.notFound__title}>
-            <span className={styles.notFound__accent}>	&#128373;</span>
+            <span className={styles.notFound__accent}>404	&#128373;</span>
             <span className={styles.notFound__text}>It seems that the page you are looking for doesn&apos;t exist</span>
           </h1>
           <Link to='/' className={styles.notFound__link}>Back to main page</Link>
@@ -36,3 +36,4 @@ export default function NotFound () : JSX.Element {
     </div>
   );
 }
+

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { OfferType } from '../../types/offer-type';
-import { fetchOffers, fetchCurrentOffer, fetchOfferComments,fetchOffersNearby, addComment, fetchFavorites } from '../api-actions';
+import { fetchOffers, fetchCurrentOffer, fetchOfferComments,fetchOffersNearby, addComment, fetchFavorites, setIsFavorite } from '../api-actions';
 import { DEFAULT_SORTING } from '../../const';
 import { NameSpace, RequestStatus } from '../../const';
 import { Comment } from '../../types/comment';
@@ -115,6 +115,27 @@ export const offerSlice = createSlice({
       .addCase(fetchFavorites.rejected, (state) => {
         state.isFavoriteDataLoading = RequestStatus.Rejected;
         state.error = 'Error';
+      })
+      .addCase(setIsFavorite.pending, (state) => {
+        state.isFavoriteDataLoading = RequestStatus.Pending;
+      })
+      .addCase(setIsFavorite.fulfilled, (state, action) => {
+        state.isFavoriteDataLoading = RequestStatus.Fulfilled;
+
+        if (action.payload.isFavorite) {
+          state.favoriteOffers.push(action.payload);
+        } else {
+          state.favoriteOffers = state.favoriteOffers.filter((offer) => offer.id !== action.payload.id);
+        }
+
+        if (action.payload.id === state.currentOffer?.id) {
+          state.currentOffer = action.payload;
+        }
+        state.offers = state.offers.map((offer) => (offer.id === action.payload.id) ? action.payload : offer);
+        state.nearbyOffers = state.nearbyOffers.map((offer) => (offer.id === action.payload.id) ? action.payload : offer);
+      })
+      .addCase(setIsFavorite.rejected, (state) => {
+        state.isFavoriteDataLoading = RequestStatus.Rejected;
       });
   }
 });
