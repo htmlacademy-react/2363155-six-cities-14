@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import { AppRoute } from '../../const';
 import cn from 'classnames';
 import FavoriteButton from '../favorite-button/favorite-button';
+import { getRating } from '../../util';
 
 type CardProps = {
   offer: OfferType;
@@ -14,7 +15,7 @@ type CardProps = {
 
 export default function Card ({offer, onCardHover, isMainPage = true, isFavoritesPage, isOfferPage}: CardProps): JSX.Element {
   const isPremium = 'Premium';
-  const ratingPrecentage = Math.round(offer.rating) / 5 * 100;
+  const ratingPrecentage = getRating(offer.rating);
   const offerId: string = `/offer/${offer.id}`;
 
   function handleMouseEnter() {

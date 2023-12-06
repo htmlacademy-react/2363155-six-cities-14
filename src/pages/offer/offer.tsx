@@ -1,6 +1,6 @@
 import {Helmet} from 'react-helmet-async';
 import {Navigate} from 'react-router-dom';
-import { AppRoute, RequestStatus, MAX_OFFER_IMAGES_COUNT } from '../../const';
+import { AppRoute, RequestStatus, MAX_OFFER_IMAGES_COUNT, NEARBY_COUNT } from '../../const';
 import Logo from '../../components/logo/logo';
 import MainNavigation from '../../components/main-navigation/main-navigation';
 import {useParams} from 'react-router-dom';
@@ -16,6 +16,7 @@ import Spinner from '../../components/spinner/spinner';
 import { getCurrentOffer, getCurrentComments, getNearbyOffers } from '../../store/slices/selectors';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
 import cn from 'classnames';
+import { getRating } from '../../util';
 
 export default function Offer (): JSX.Element {
   const dispatch = useAppDispatch();
@@ -23,10 +24,9 @@ export default function Offer (): JSX.Element {
   const currentOffer = useAppSelector(getCurrentOffer);
   const currentComments = useAppSelector(getCurrentComments);
   const nearbyOffers = useAppSelector(getNearbyOffers);
-  const nearbyToShow = nearbyOffers.slice(0, 3);
+  const nearbyToShow = nearbyOffers.slice(0, NEARBY_COUNT);
   const loadingStatus = useAppSelector((state) => state.offers.isCurrentOfferDataLoading);
   const isPremium = 'Premium';
-  const getRating = (rating: number) => Math.round(rating) / 5 * 100;
 
   useEffect(() => {
     if (offerId) {
