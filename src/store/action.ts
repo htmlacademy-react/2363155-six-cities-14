@@ -1,14 +1,8 @@
 import { createAction } from '@reduxjs/toolkit';
 import { OfferType } from '../types/offer-type';
 
-export const changeCity = createAction('changeCity', (value: string) => ({
-  payload: value,
-}));
+export const changeCity = createAction<string>('changeCity');
 
-export const getOffers = createAction('getOffers', (value: OfferType[]) => ({
-  payload: value,
-}));
+export const getOffers = createAction<OfferType[]>('getOffers');
 
-export const changeSortOption = createAction('changeSorting', (value: string) => ({
-  payload: value,
-}));
+export const changeSortOption = createAction<string>('changeSorting');
