@@ -1,4 +1,4 @@
-import {ChangeEvent, useState, FormEvent, useRef} from 'react';
+import {ChangeEvent, useState, FormEvent, useRef, Fragment} from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { addComment} from '../../store/api-actions';
 import { RequestStatus } from '../../const';
@@ -36,7 +36,7 @@ export default function ReviewForm ({id} : ReviewFormProps) {
     setRating(Number(evt.target.value));
   };
 
-  const handleFormSumbit = (evt : FormEvent) => {
+  const handleFormSubmit = (evt : FormEvent) => {
     evt.preventDefault();
     const userComment = {
       offerId: id,
@@ -54,13 +54,13 @@ export default function ReviewForm ({id} : ReviewFormProps) {
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSumbit} ref={formRef}>
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSubmit} ref={formRef}>
       <label className="reviews__label form__label" htmlFor="review">
   Your review
       </label>
       <div className="reviews__rating-form form__rating" key={'reviews__rating'}>
         {Object.entries(Rating).reverse().map(([key, value] : string[]) => (
-          <div key = {key}>
+          <Fragment key={key}>
             <input
               key={`${key}Input`}
               onChange={handleRatingChange}
@@ -82,7 +82,7 @@ export default function ReviewForm ({id} : ReviewFormProps) {
                 <use xlinkHref="#icon-star" />
               </svg>
             </label>
-          </div>
+          </Fragment>
         ))}
       </div>
       <textarea

@@ -17,6 +17,8 @@ export const MAX_COMMENT_COUNT = 10;
 
 export const MAX_OFFER_IMAGES_COUNT = 6;
 
+export const NEARBY_COUNT = 3;
+
 export const CITIES_MAP : TCity[] = [
   {
     location: {
