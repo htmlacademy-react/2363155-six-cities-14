@@ -3,24 +3,26 @@ import Card from '../card/card';
 import {useState} from 'react';
 import Map from '../map/map';
 import { CITIES_MAP } from '../../mocks/cities';
+import OffersSort from '../offers-sort/offers-sort';
 
 type CardListProps = {
   offers: OfferType[];
+  activeCity: string;
 }
 
-export default function CityCards ({offers}: CardListProps) {
+export default function CityCards ({offers, activeCity}: CardListProps) {
   const [hoveredOfferId, setHoveredOfferId] = useState<number | null>(null);
   function handleCardHover(offerId: number | null) {
     setHoveredOfferId(offerId);
   }
-  const activeCity = CITIES_MAP[0];
+  const cityLocation = CITIES_MAP.find((city) => city.name === activeCity)?.location;
 
   return (
     <div className="cities__places-container container">
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">312 places to stay in Amsterdam</b>
-        <form className="places__sorting" action="#" method="get">
+        <b className="places__found">{offers.length} {offers.length === 1 ? 'place' : 'places'} to stay in {activeCity}</b>
+        {/* <form className="places__sorting" action="#" method="get">
           <span className="places__sorting-caption">Sort by</span>
           <span className="places__sorting-type" tabIndex={0}>
       Popular
@@ -45,13 +47,14 @@ export default function CityCards ({offers}: CardListProps) {
         Top rated first
             </li>
           </ul>
-        </form>
+        </form> */}
+        <OffersSort />
         <div className="cities__places-list places__list tabs__content">
           {offers.map((offer : OfferType) => <Card offer={offer} onCardHover={handleCardHover} key={offer.id} />)}
         </div>
       </section>
       <div className="cities__right-section">
-        <Map offers={offers} location={activeCity.location} specialOfferId={hoveredOfferId} isMainPage/>
+        {cityLocation && <Map offers={offers} location={cityLocation} specialOfferId={hoveredOfferId} isMainPage/>}
       </div>
     </div>
   );

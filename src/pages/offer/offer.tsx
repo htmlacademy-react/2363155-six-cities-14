@@ -9,7 +9,6 @@ import OfferImage from '../../components/offer-image/offer-image';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import Card from '../../components/card/card';
-import {useEffect} from 'react';
 
 type OfferProps = {
   offers: OfferType[];
@@ -18,10 +17,6 @@ type OfferProps = {
 export default function Offer ({offers} : OfferProps): JSX.Element {
   const params = useParams();
   const currentOffer = offers.find((el) => el.id === Number(params.id));
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   if (!currentOffer) {
     return <Navigate to={AppRoute.Error} />;
@@ -110,7 +105,6 @@ export default function Offer ({offers} : OfferProps): JSX.Element {
               <ReviewsList offer={currentOffer}/>
             </div>
           </div>
-          {/* <section className="offer__map map" /> */}
           <Map location={currentOffer.city.location} offers={offers} specialOfferId={currentOffer.id} isOfferPage/>
         </section>
         <div className="container">

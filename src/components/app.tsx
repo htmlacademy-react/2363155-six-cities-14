@@ -17,12 +17,12 @@ export default function App(): JSX.Element {
       <BrowserRouter>
         <ScrollToTop>
           <Routes>
-            <Route path={AppRoute.Main} element={<MainPage data={CardOffer}/>} >
+            <Route path={AppRoute.Main} element={<MainPage />} >
               {CITIES.map((city : string) => (
                 <Route
                   key={city}
                   path={city}
-                  element={<MainPage data={CardOffer} />}
+                  element={<MainPage />}
                 >
                 </Route>
               ))}
