@@ -41,7 +41,7 @@ function createIcon(config: IconConfig) {
 type MapProps = {
   location: Location;
   offers: OfferType[];
-  specialOfferId: number | null;
+  specialOfferId: string | null;
   isOfferPage?: boolean;
   isMainPage?: boolean;
 }

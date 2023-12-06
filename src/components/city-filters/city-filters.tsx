@@ -1,7 +1,7 @@
 import {NavLink} from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks/redux-hooks';
-import { changeCity } from '../../store/action';
+import { citySlice } from '../../store/slices/city';
 import { CITIES } from '../../const';
 
 export default function CityFilters () {
@@ -15,7 +15,7 @@ export default function CityFilters () {
           <NavLink
             to={`${AppRoute.Main}${city}`}
             className={({ isActive }) =>(isActive ? ACTIVE_CLASS : LINK_CLASS)}
-            onClick={() => dispatch(changeCity(city))}
+            onClick={() => dispatch(citySlice.actions.changeCity(city))}
           >
             <span>{city}</span>
           </NavLink>

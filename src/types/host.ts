@@ -1,6 +1,6 @@
 export type Host = {
-  avatarUrl: string;
-  id: number;
-  isPro: boolean;
   name: string;
+  id: number;
+  avatarUrl: string;
+  isPro: boolean;
 }

@@ -1,19 +1,19 @@
-import { OfferType } from '../../types/offer-type';
+import { Comment } from '../../types/comment';
 import ReviewForm from '../../components/review-form/review-form';
 
 type RewievsListProps = {
-  offer: OfferType;
+  comments: Comment[];
 }
-export default function ReviewsList({offer} : RewievsListProps) {
+export default function ReviewsList({comments} : RewievsListProps) {
   const getRating = (rating: number) => Math.round((rating * 100) / 5);
 
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
-  Reviews · <span className="reviews__amount">{offer.comments.length}</span>
+  Reviews · <span className="reviews__amount">{comments.length}</span>
       </h2>
       <ul className="reviews__list">
-        {offer.comments.map((comment) => (
+        {comments.map((comment) => (
           <li key={comment.id} className="reviews__item">
             <div className="reviews__user user">
               <div className="reviews__avatar-wrapper user__avatar-wrapper">

@@ -5,7 +5,7 @@ import cn from 'classnames';
 
 type CardProps = {
   offer: OfferType;
-  onCardHover?: (offerId: number | null) => void;
+  onCardHover?: (offerId: string | null) => void;
   isMainPage?: boolean;
   isFavoritesPage?: boolean;
   isOfferPage?: boolean;
@@ -14,6 +14,7 @@ type CardProps = {
 export default function Card ({offer, onCardHover, isMainPage = true, isFavoritesPage, isOfferPage}: CardProps): JSX.Element {
   const isPremium = 'Premium';
   const ratingPrecentage = Math.round((offer.rating * 100) / 5);
+  const offerId: string = `/offer/${offer.id}`;
 
   function handleMouseEnter() {
     onCardHover?.(offer.id);
@@ -85,11 +86,10 @@ export default function Card ({offer, onCardHover, isMainPage = true, isFavorite
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.Offer}/${offer.id}`}>{offer.title}</Link>
+          <Link to={offerId}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{`${offer.type[0].toUpperCase()}${offer.type.slice(1)}`}</p>
       </div>
     </article>
   );
 }
-
