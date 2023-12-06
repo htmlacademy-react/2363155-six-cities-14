@@ -1,12 +1,11 @@
 export type Comment = {
-  comment: string;
+  id: string;
   date: string;
-  id: number;
-  rating: number;
   user: {
-    avatarUrl: string;
-    id: number;
-    isPro: boolean;
     name: string;
+    avatarUrl: string;
+    isPro: boolean;
   };
-}
+  comment: string;
+  rating: number;
+};
