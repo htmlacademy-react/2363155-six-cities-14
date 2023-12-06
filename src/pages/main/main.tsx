@@ -1,4 +1,4 @@
-import CardList from '../../components/card-list/card-list';
+import CityCards from '../../components/cities-cards/cities-cards';
 import { OfferType } from '../../types/offer-type';
 import Logo from '../../components/logo/logo';
 import CityFilters from '../../components/city-filters/city-filters';
@@ -28,7 +28,7 @@ export default function MainPage ({data} : MainPageProps): JSX.Element {
           </section>
         </div>
         <div className="cities">
-          <CardList offers={data} />
+          <CityCards offers={data} />
         </div>
       </main>
     </div>

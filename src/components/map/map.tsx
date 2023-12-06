@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/usemap';
 import { OfferType } from '../../types/offer-type';
 import { Location } from '../../types/location';
+import cn from 'classnames';
 
 type IconConfig = {
   url: string;
@@ -41,11 +42,17 @@ type MapProps = {
   location: Location;
   offers: OfferType[];
   specialOfferId: number | null;
+  isOfferPage?: boolean;
+  isMainPage?: boolean;
 }
 
-export default function Map ({location, offers, specialOfferId} : MapProps) {
+export default function Map ({location, offers, specialOfferId, isMainPage, isOfferPage} : MapProps) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, location);
+  const mapClass = cn('map', {
+    'cities__map': isMainPage,
+    'offer__map': isOfferPage,
+  });
 
   useEffect(() => {
     if (map) {
@@ -77,5 +84,5 @@ export default function Map ({location, offers, specialOfferId} : MapProps) {
     }
   }, [map, offers, specialOfferId]);
 
-  return <section className="cities__map map" ref={mapRef}/>;
+  return <section className={mapClass} ref={mapRef}/>;
 }
