@@ -15,7 +15,7 @@ import ScrollToTop from './scroll-top/scroll-top';
 import Spinner from './spinner/spinner';
 import { fetchOffers, checkAuthAction } from '../store/api-actions';
 import { store } from '../store';
-import RedirectToMain from './redirect-to-main/redirect-to-main';
+import PublicRoute from './public-route/public-route';
 
 store.dispatch(checkAuthAction());
 store.dispatch(fetchOffers());
@@ -46,9 +46,9 @@ export default function App(): JSX.Element {
             <Route
               path={AppRoute.Login}
               element={
-                <RedirectToMain>
+                <PublicRoute>
                   <Login />
-                </RedirectToMain>
+                </PublicRoute>
               }
             />
             <Route
