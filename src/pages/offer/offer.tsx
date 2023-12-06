@@ -1,6 +1,6 @@
 import {Helmet} from 'react-helmet-async';
 import {Navigate} from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, RequestStatus } from '../../const';
 import Logo from '../../components/logo/logo';
 import MainNavigation from '../../components/main-navigation/main-navigation';
 import {useParams} from 'react-router-dom';
@@ -10,39 +10,38 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import Card from '../../components/card/card';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux-hooks';
-import { fetchCurrentOffer, fetchOfferComments } from '../../store/api-actions';
+import { fetchCurrentOffer, fetchOfferComments, fetchOffersNearby } from '../../store/api-actions';
 import { useEffect } from 'react';
-import { CardOffer } from '../../mocks/cardOffer';
 import Spinner from '../../components/spinner/spinner';
 
 
 export default function Offer (): JSX.Element {
-  const mock = CardOffer;
   const dispatch = useAppDispatch();
   const {id: offerId} = useParams();
   const currentOffer = useAppSelector((state) => state.offers.currentOffer);
   const currentComments = useAppSelector((state) => state.offers.currentOfferComments);
+  const nearbyOffers = useAppSelector((state) => state.offers.nearbyOffers);
+  const nearbyToShow = nearbyOffers.slice(0, 3);
   const loadingStatus = useAppSelector((state) => state.offers.isCurrentOfferDataLoading);
+  const isPremium = 'Premium';
+  const getRating = (rating: number) => Math.round((rating * 100) / 5);
+
   useEffect(() => {
     if (offerId) {
       dispatch(fetchCurrentOffer(offerId));
       dispatch(fetchOfferComments(offerId));
+      dispatch(fetchOffersNearby(offerId));
     }
-    // return () => {
-    //   dispatch(offerSlice.actions.dropOffer(null));
-    // };
-
   }, [offerId, dispatch]);
 
-  if (!currentOffer) {
-    return <Navigate to={AppRoute.Error} />;
+  if (!currentOffer || loadingStatus !== RequestStatus.Fulfilled) {
+    return (
+      loadingStatus === RequestStatus.Rejected ? <Navigate to={AppRoute.Error} /> : <Spinner />
+    );
   }
-  const isPremium = 'Premium';
-  const getRating = (rating: number) => Math.round((rating * 100) / 5);
 
   return (
     <div className="page">
-      {loadingStatus && <Spinner /> }
       <Helmet>
         <title>6 cities: offer</title>
       </Helmet>
@@ -119,10 +118,10 @@ export default function Offer (): JSX.Element {
                   <p className="offer__text">{currentOffer.description}</p>
                 </div>
               </div>
-              <ReviewsList comments={currentComments}/>
+              <ReviewsList comments={currentComments} id={offerId}/>
             </div>
           </div>
-          <Map location={currentOffer.city.location} offers={[currentOffer]} specialOfferId={currentOffer.id} isOfferPage/>
+          <Map location={currentOffer.city.location} offers={[currentOffer, ...nearbyToShow]} specialOfferId={currentOffer.id} isOfferPage/>
         </section>
         <div className="container">
           <section className="near-places places">
@@ -130,8 +129,7 @@ export default function Offer (): JSX.Element {
           Other places in the neighbourhood
             </h2>
             <div className="near-places__list places__list">
-              {/*  МОКИ */}
-              {mock.map((offer : OfferType) => <Card offer={offer} key={offer.id} isMainPage={false} isOfferPage />)}
+              {nearbyToShow.map((offer : OfferType) => <Card offer={offer} key={offer.id} isMainPage={false} isOfferPage />)}
             </div>
           </section>
         </div>

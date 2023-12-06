@@ -1,0 +1,36 @@
+.notFound {
+  margin: 0 auto;
+  width: 65%;
+}
+
+.notFound__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.notFound__text {
+  opacity: 0.6;
+  font-weight: 400;
+}
+
+.notFound__accent {
+  margin: 0 auto;
+  display: block;
+  padding: 36px;
+  width: fit-content;
+  font-size: 55px;
+}
+
+.notFound__link {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  color: #4481c3;
+  font-size: 30px;
+}
+
+.notFound__link:hover {
+  color: #2e4b6b;
+}
