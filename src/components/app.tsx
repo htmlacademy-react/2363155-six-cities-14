@@ -8,6 +8,7 @@ import Favorites from '../pages/favorites/favorites';
 import Offer from '../pages/offer/offer';
 import NotFound from '../pages/not-found/not-found';
 import { CardOffer } from '../mocks/cardOffer';
+import { CITIES } from '../const';
 
 export default function App(): JSX.Element {
   return (
@@ -15,7 +16,14 @@ export default function App(): JSX.Element {
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Main} element={<MainPage data={CardOffer}/>} >
-            <Route path={':city'}/>
+            {CITIES.map((city) => (
+              <Route
+                key={city}
+                path={city}
+                element={<MainPage data={CardOffer} />}
+              >
+              </Route>
+            ))}
           </Route>
           <Route
             path={AppRoute.Login}
