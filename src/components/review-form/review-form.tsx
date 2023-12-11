@@ -8,8 +8,11 @@ type ReviewFormProps = {
   id: string | undefined;
 }
 
-const MIN_COMMENT_LENGTH = 50;
-const MAX_COMMENT_LENGTH = 300;
+const CommentTextLength = {
+  Min: 50,
+  Max: 300,
+} as const;
+
 const Rating = {
   5: 'perfect',
   4: 'good',
@@ -23,8 +26,8 @@ export default function ReviewForm ({id} : ReviewFormProps) {
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(0);
   const isValid =
-    comment.length >= MIN_COMMENT_LENGTH &&
-    comment.length <= MAX_COMMENT_LENGTH &&
+    comment.length >= CommentTextLength.Min &&
+    comment.length <= CommentTextLength.Max &&
     rating;
   const commentLoadStatus = useAppSelector((state) => state.offers.isCommentLoading);
   const handleTextareaChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
@@ -99,7 +102,7 @@ export default function ReviewForm ({id} : ReviewFormProps) {
     To submit review please make sure to set{' '}
           <span className="reviews__star">rating</span> and describe
     your stay with at least{' '}
-          <b className="reviews__text-amount">50 characters</b>.
+          <b className="reviews__text-amount">{CommentTextLength.Min} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"
