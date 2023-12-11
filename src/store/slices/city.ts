@@ -22,3 +22,4 @@ export const citySlice = createSlice({
 });
 
 export const { changeCity } = citySlice.actions;
+
